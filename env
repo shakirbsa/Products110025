@@ -109,7 +109,7 @@
 #--------------------------------------------------------------------
 # SECURITY
 #--------------------------------------------------------------------
-
+app.locale = "en"
 # security.csrfProtection = 'cookie'
 # security.tokenRandomize = false
 # security.tokenName = 'csrf_token_name'
