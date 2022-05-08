@@ -10,6 +10,9 @@
 	<link rel="shortcut icon" type="image/png" href="/favicon.ico"/>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+  
 	<!-- STYLES -->
 
 	<style {csp-style-nonce}>
@@ -237,6 +240,7 @@
   <div class="form-group" >
     <label for="product_name">Product Name</label>
     <input type="text" class="form-control" id="product_name"  name="product_name"  placeholder="Enter Product Name">
+	<input type="hidden" class="form-control" id="product_id"  name="product_id"  value="0">
   </div>
   <div class="form-group">
     <label for="product_description">Product Detail</label>
@@ -245,7 +249,7 @@
 
   <div class="form-group">
     <label for="product_price">Product Price</label>
-    <input type="numeric" class="form-control" id="product_price"  name="product_price" placeholder="Enter Product Price" >
+    <input type="number" class="form-control" id="product_price"  name="product_price" placeholder="Enter Product Price" >
   </div>
   
   <div class="form-group">
@@ -253,9 +257,24 @@
     <input type="file" class="form-control" id="product_images"  name="product_images[]"  accept="image/png, image/gif, image/jpeg" multiple>
 
   </div>
+
+  <div class="form-group" id="uploaded_images">
+  <label for="product_images">Uploaded Images : Unselect to remove </label>
+   
+<span id="pre_images"></span>
+  </div>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
-
+<table width="100%" id="product_table">
+	<thead>
+	<th>Sr. No</th>
+	<th>Product Name</th>
+	<th>Product Price </th>
+	<th>Product Description</th>
+	<th>Images</th>
+	<th> Action</th>
+	</thead>
+	</table>
 </section>
 
 <div class="further">
@@ -331,7 +350,61 @@
 	}
 
 	$(document).ready(function() {
-		
+		$("#uploaded_images").hide();
+		var datatable=$("#product_table").DataTable();
+function loadtable()
+{
+	$.get('get', function(newDataArray) {
+    datatable.clear();
+	obj=JSON.parse(newDataArray);
+    datatable.rows.add(obj);
+    datatable.draw();
+});
+
+
+}
+loadtable();
+	
+$(document).on('click', '.delete',function(e){
+	e.preventDefault(); 
+	$.ajax({
+			type: "POST",
+			url: 'deletebyid',
+			data:  {id:$(this).data('id')},// 
+			success: function(data)
+			{
+				obj=JSON.parse(data);
+			if(obj.success)
+			{
+				alert(obj.message);	
+				loadtable();
+			
+			}else{
+				alert(obj.message);	
+
+			}
+			}
+			});
+
+});
+
+$(document).on('click', '.edit',function(e){
+	e.preventDefault(); 
+	
+	$("#product_name").val($(this).data('name'));
+	$("#product_id").val($(this).data('id'));
+	$("#product_description").val($(this).data('description'));
+	$("#product_price").val($(this).data('price'));
+	$(".edtimg").remove();
+	$("#pre_images").append(atob($(this).data('images')))
+	$("#uploaded_images").show();
+	$("#product_name").focus();
+	
+
+
+});
+
+
 
 		$("#product_form").submit(function(e) {
 
@@ -350,6 +423,9 @@ $.ajax({
 			{
 				alert(obj.message);	
 				$("#product_form").trigger("reset");
+				$(".edtimg").remove();
+				$("#uploaded_images").hide();
+				loadtable();
 			}else{
 				alert(obj.message);	
 
