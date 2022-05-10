@@ -6,6 +6,8 @@
 	<meta name="description" content="The small framework with powerful features">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="shortcut icon" type="image/png" href="/favicon.ico"/>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
 	<!-- STYLES -->
 
@@ -218,7 +220,7 @@
 	</div>
 
 	<div class="heroe">
-
+	
 		<h1>Welcome to CodeIgniter <?= CodeIgniter\CodeIgniter::CI_VERSION ?></h1>
 
 		<h2>The small framework with powerful features</h2>
@@ -231,17 +233,7 @@
 
 <section>
 
-	<h1>About this page</h1>
-
-	<p>The page you are looking at is being generated dynamically by CodeIgniter.</p>
-
-	<p>If you would like to edit this page you will find it located at:</p>
-
-	<pre><code>app/Views/welcome_message.php</code></pre>
-
-	<p>The corresponding controller for this page can be found at:</p>
-
-	<pre><code>app/Controllers/Home.php</code></pre>
+<h1><a href="products/add"><button type="button" class="btn btn-primary">MANAGE PRODCUTS  </button><a></h1>
 
 </section>
 
