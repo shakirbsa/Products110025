@@ -232,6 +232,7 @@
 <section>
 
 	<h1>About this page</h1>
+<h2>ha ha ha its working fine </h2>
 
 	<p>The page you are looking at is being generated dynamically by CodeIgniter.</p>
 
