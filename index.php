@@ -22,7 +22,7 @@ $pathsConfig = FCPATH . 'app/Config/Paths.php';
 require realpath($pathsConfig) ?: $pathsConfig;
 
 $paths = new Config\Paths();
-define('ENVIRONMENT', 'development');
+define('ENVIRONMENT', 'production');
 // Location of the framework bootstrap file.
 $bootstrap = rtrim($paths->systemDirectory, '\\/ ') . DIRECTORY_SEPARATOR . 'bootstrap.php';
 $app       = require realpath($bootstrap) ?: $bootstrap;
