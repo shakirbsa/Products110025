@@ -2,6 +2,4 @@
 deployment:
   tasks:
     - export DEPLOYPATH=/home4/nnucoin/public_html/products110025
-    - /bin/rm -Rf $DEPLOYPATH
-    - /bin/mkdir $DEPLOYPATH
-    - /bin/cp -R src/ $DEPLOYPATH
+    - /bin/cp -R ./ $DEPLOYPATH
